@@ -12,13 +12,13 @@ function App() {
   const options = {
     legend: 'none',
     pieSliceText: 'label',
-    title: '資金來源的相關性',
+    title: '資金來源',
     pieStartAngle: 100,
   };
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex m-10 gap-10 h-96 justify-center">
+      <div className="flex m-10 gap-10 justify-center">
         <div
           className={`${
             swapLeft && 'border border-blue-500'
@@ -30,8 +30,8 @@ function App() {
           ) : (
             <>
               <p>{candidateLeft.姓名}</p>
-              <p>{candidateLeft.總收入}</p>
-              <p>{candidateLeft.捐贈企業數}</p>
+              <p>{`資金總額 ${candidateLeft.總收入} 元`}</p>
+              <p>{`捐贈企業 ${candidateLeft.捐贈企業數} 間`}</p>
               <Chart
                 chartType="PieChart"
                 data={candidateLeft.pie}
@@ -53,8 +53,8 @@ function App() {
           ) : (
             <>
               <p>{candidateRight.姓名}</p>
-              <p>{candidateRight.總收入}</p>
-              <p>{candidateRight.捐贈企業數}</p>
+              <p>{`資金總額 ${candidateLeft.總收入} 元`}</p>
+              <p>{`捐贈企業 ${candidateLeft.捐贈企業數} 間`}</p>
               <Chart
                 chartType="PieChart"
                 data={candidateRight.pie}
