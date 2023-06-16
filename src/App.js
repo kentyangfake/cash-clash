@@ -53,8 +53,8 @@ function App() {
           ) : (
             <>
               <p>{candidateRight.姓名}</p>
-              <p>{`資金總額 ${candidateLeft.總收入} 元`}</p>
-              <p>{`捐贈企業 ${candidateLeft.捐贈企業數} 間`}</p>
+              <p>{`資金總額 ${candidateRight.總收入} 元`}</p>
+              <p>{`捐贈企業 ${candidateRight.捐贈企業數} 間`}</p>
               <Chart
                 chartType="PieChart"
                 data={candidateRight.pie}
