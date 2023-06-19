@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Chart } from 'react-google-charts';
 import { useImmer } from 'use-immer';
 import data from './assets/data.json';
+import CandidateCard from './components/CandiateCard';
 
 function App() {
   const [swapLeft, setSwapLeft] = useState(true);
@@ -9,62 +9,19 @@ function App() {
   const [candidateRight, setCandidateRight] = useImmer({});
   const [candidates, setCandidates] = useState(data);
 
-  const options = {
-    legend: 'none',
-    pieSliceText: 'label',
-    title: '資金來源',
-    pieStartAngle: 100,
-  };
-
   return (
     <div className="flex flex-col items-center">
       <div className="flex m-10 gap-10 justify-center">
-        <div
-          className={`${
-            swapLeft && 'border border-blue-500'
-          } flex flex-col items-center bg-blue-200 w-96 hover:bg-blue-100`}
+        <CandidateCard
+          candidate={candidateLeft}
+          isSelected={swapLeft}
           onClick={() => setSwapLeft(true)}
-        >
-          {Object.keys(candidateLeft).length === 0 ? (
-            '請選擇議員'
-          ) : (
-            <>
-              <p>{candidateLeft.姓名}</p>
-              <p>{`資金總額 ${candidateLeft.總收入} 元`}</p>
-              <p>{`捐贈企業 ${candidateLeft.捐贈企業數} 間`}</p>
-              <Chart
-                chartType="PieChart"
-                data={candidateLeft.pie}
-                options={options}
-                width={'100%'}
-                height={'250px'}
-              />
-            </>
-          )}
-        </div>
-        <div
-          className={`${
-            !swapLeft && 'border border-red-500'
-          } flex flex-col items-center bg-red-200 w-96 hover:bg-red-100`}
+        />
+        <CandidateCard
+          candidate={candidateRight}
+          isSelected={!swapLeft}
           onClick={() => setSwapLeft(false)}
-        >
-          {Object.keys(candidateRight).length === 0 ? (
-            '請選擇議員'
-          ) : (
-            <>
-              <p>{candidateRight.姓名}</p>
-              <p>{`資金總額 ${candidateRight.總收入} 元`}</p>
-              <p>{`捐贈企業 ${candidateRight.捐贈企業數} 間`}</p>
-              <Chart
-                chartType="PieChart"
-                data={candidateRight.pie}
-                options={options}
-                width={'100%'}
-                height={'250px'}
-              />
-            </>
-          )}
-        </div>
+        />
       </div>
       <div className="flex flex-wrap gap-2 w-[1000px]">
         {candidates.map((candidate) => {
