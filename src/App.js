@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex m-10 gap-10 justify-center">
+      <div className="flex m-10 gap-10 h-96 justify-center">
         <CandidateCard
           candidate={candidateLeft}
           isSelected={swapLeft}
