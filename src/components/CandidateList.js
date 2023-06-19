@@ -43,24 +43,28 @@ const CandidateList = ({
   };
 
   return (
-    <div className="flex flex-wrap gap-2 w-[1000px]">
-      {candidates.map((candidate) => {
-        const isSelected =
-          candidateLeft.姓名 === candidate.姓名 ||
-          candidateRight.姓名 === candidate.姓名;
+    <div className="flex justify-center flex-wrap gap-2 w-[1000px]">
+      {candidates.length === 0 ? (
+        <p>查無此人</p>
+      ) : (
+        candidates.map((candidate) => {
+          const isSelected =
+            candidateLeft.姓名 === candidate.姓名 ||
+            candidateRight.姓名 === candidate.姓名;
 
-        return (
-          <div
-            className={`${
-              isSelected ? 'bg-amber-300' : 'bg-zinc-200 hover:bg-zinc-100'
-            } flex justify-center items-center w-24 h-20 p-2`}
-            key={candidate.姓名}
-            onClick={() => selectCandidate(candidate)}
-          >
-            {candidate.姓名}
-          </div>
-        );
-      })}
+          return (
+            <div
+              className={`${
+                isSelected ? 'bg-amber-300' : 'bg-zinc-200 hover:bg-zinc-100'
+              } flex justify-center items-center w-24 h-20 p-2`}
+              key={candidate.姓名}
+              onClick={() => selectCandidate(candidate)}
+            >
+              {candidate.姓名}
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };
