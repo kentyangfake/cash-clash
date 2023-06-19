@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import data from '../assets/data.json';
 
 const CandidateList = ({
   swapLeft,
-  candidates,
   candidateLeft,
   candidateRight,
   setCandidateLeft,
   setCandidateRight,
 }) => {
+  const [candidates, setCandidates] = useState(data);
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (value) => {
+    setSearchValue(value);
+    const filteredCandidates = data.filter((candidate) =>
+      candidate.姓名.includes(value)
+    );
+    setCandidates(filteredCandidates);
+  };
+
   const selectCandidate = (candidate) => {
     if (
       candidateLeft.姓名 === candidate.姓名 ||
@@ -43,29 +54,39 @@ const CandidateList = ({
   };
 
   return (
-    <div className="flex justify-center flex-wrap gap-2 w-[1000px]">
-      {candidates.length === 0 ? (
-        <p>查無此人</p>
-      ) : (
-        candidates.map((candidate) => {
-          const isSelected =
-            candidateLeft.姓名 === candidate.姓名 ||
-            candidateRight.姓名 === candidate.姓名;
+    <>
+      <input
+        type="text"
+        value={searchValue}
+        onChange={(e) => handleSearch(e.target.value)}
+        placeholder="搜尋議員姓名"
+        className="border-2 mb-10"
+      />
 
-          return (
-            <div
-              className={`${
-                isSelected ? 'bg-amber-300' : 'bg-zinc-200 hover:bg-zinc-100'
-              } flex justify-center items-center w-24 h-20 p-2`}
-              key={candidate.姓名}
-              onClick={() => selectCandidate(candidate)}
-            >
-              {candidate.姓名}
-            </div>
-          );
-        })
-      )}
-    </div>
+      <div className="flex justify-center flex-wrap gap-2 w-[1000px]">
+        {candidates.length === 0 ? (
+          <p>查無此人</p>
+        ) : (
+          candidates.map((candidate) => {
+            const isSelected =
+              candidateLeft.姓名 === candidate.姓名 ||
+              candidateRight.姓名 === candidate.姓名;
+
+            return (
+              <div
+                className={`${
+                  isSelected ? 'bg-amber-300' : 'bg-zinc-200 hover:bg-zinc-100'
+                } flex justify-center items-center w-24 h-20 p-2`}
+                key={candidate.姓名}
+                onClick={() => selectCandidate(candidate)}
+              >
+                {candidate.姓名}
+              </div>
+            );
+          })
+        )}
+      </div>
+    </>
   );
 };
 
