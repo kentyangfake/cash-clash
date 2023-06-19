@@ -27,18 +27,20 @@ const CandidateList = ({
       return;
     }
 
+    const convertToNumber = (value) => parseInt(value.split(',').join(''));
+
     const updateCandidate = (draft, candidate) => {
       draft.姓名 = candidate.姓名;
       draft.總收入 = candidate.總收入;
       draft.捐贈企業數 = candidate.捐贈企業數;
       draft.pie = [
         ['來源', '金額'],
-        ['個人', parseInt(candidate.個人捐贈收入.split(',').join(''))],
-        ['營利事業', parseInt(candidate.營利事業捐贈收入.split(',').join(''))],
-        ['政黨', parseInt(candidate.政黨捐贈收入.split(',').join(''))],
-        ['人民團體', parseInt(candidate.人民團體捐贈收入.split(',').join(''))],
-        ['匿名', parseInt(candidate.匿名捐贈收入.split(',').join(''))],
-        ['其他', parseInt(candidate.其他收入.split(',').join(''))],
+        ['個人', convertToNumber(candidate.個人捐贈收入)],
+        ['營利事業', convertToNumber(candidate.營利事業捐贈收入)],
+        ['政黨', convertToNumber(candidate.政黨捐贈收入)],
+        ['人民團體', convertToNumber(candidate.人民團體捐贈收入)],
+        ['匿名', convertToNumber(candidate.匿名捐贈收入)],
+        ['其他', convertToNumber(candidate.其他收入)],
       ];
     };
 
